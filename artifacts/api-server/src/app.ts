@@ -3,10 +3,11 @@ import cors from "cors";
 import router from "./routes";
 import { logger } from "./lib/logger";
 import { IncomingMessage, ServerResponse } from "http";
+import * as pinoHttpModule from "pino-http";
 import type { PinoHttpOptions } from "pino-http";
 
-// Fixes TS2349 (pino-http not callable)
-const pinoHttp: (opts?: PinoHttpOptions) => any = require("pino-http");
+// Modern ESM fix: use .default
+const pinoHttp = pinoHttpModule.default as (opts?: PinoHttpOptions) => any;
 
 const app: Express = express();
 
