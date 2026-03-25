@@ -5,6 +5,7 @@ import { logger } from "./lib/logger";
 import { IncomingMessage, ServerResponse } from "http";
 import type { PinoHttpOptions } from "pino-http";
 
+// Fixes TS2349 (pino-http not callable)
 const pinoHttp: (opts?: PinoHttpOptions) => any = require("pino-http");
 
 const app: Express = express();
@@ -32,7 +33,6 @@ app.use(
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use("/api", router);
 
 export default app;
