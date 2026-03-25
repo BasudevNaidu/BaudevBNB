@@ -1,9 +1,11 @@
 import express, { type Express } from "express";
 import cors from "cors";
-import pinoHttp = require("pino-http"); // 🔥 this fixes TS2349
 import router from "./routes";
 import { logger } from "./lib/logger";
 import { IncomingMessage, ServerResponse } from "http";
+import type { PinoHttpOptions } from "pino-http";
+
+const pinoHttp: (opts?: PinoHttpOptions) => any = require("pino-http");
 
 const app: Express = express();
 
