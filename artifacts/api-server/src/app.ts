@@ -3,11 +3,13 @@ import cors from "cors";
 import router from "./routes";
 import { logger } from "./lib/logger";
 import { IncomingMessage, ServerResponse } from "http";
-import * as pinoHttpModule from "pino-http";
+
+// Modern ESM-compatible import for pino-http
+import pinoHttpCommonJS = require("pino-http");
 import type { PinoHttpOptions } from "pino-http";
 
-// Modern ESM fix: use .default
-const pinoHttp = pinoHttpModule.default as (opts?: PinoHttpOptions) => any;
+// Tell TypeScript this is callable
+const pinoHttp = pinoHttpCommonJS as unknown as (opts?: PinoHttpOptions) => any;
 
 const app: Express = express();
 
@@ -28,7 +30,7 @@ app.use(
         };
       },
     },
-  }),
+  })
 );
 
 app.use(cors());
